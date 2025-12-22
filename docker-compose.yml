@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: bdu_app
+      POSTGRES_PASSWORD: bdu_pass
+      POSTGRES_DB: bdu
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DISPLAY=${DISPLAY}
+      - EXPORT_DIR=/app/results
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./results:/app/results
+
+volumes:
+  db_data:
