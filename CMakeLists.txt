@@ -40,6 +40,8 @@ set(LOGIC_SOURCES
     src/downloader.cpp src/downloader.hpp
     src/xlsx_converter.cpp src/xlsx_converter.hpp
     src/importer.cpp src/importer.hpp
+    src/orm/user_repository.cpp src/orm/user_repository.hpp
+    src/orm/unit_of_work.hpp
 )
 
 set(GUI_SOURCES
